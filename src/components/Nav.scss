@@ -1,0 +1,27 @@
+.nav {
+  height: 45px;
+  padding: 0 18px;
+  background: #fff;
+  a {
+    display: inline-block;
+    padding: 12px 3px 13px;
+    font-size: 16px;
+    margin: 0 8px;
+    position: relative;
+    &.active {
+      color: #03c75a;
+      font-weight: bold;
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        height: 2px;
+        background: #fff;
+        content: '';
+        background: #03c75a;
+      }
+    }
+  }
+}
