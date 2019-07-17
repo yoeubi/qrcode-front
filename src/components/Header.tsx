@@ -1,20 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import cn from 'classnames/bind';
 import styles from './Header.scss';
 
+interface Props extends RouteComponentProps {}
+
 const cx = cn.bind(styles);
 
-const Header: React.FunctionComponent<{}> = () => {
+const Header: React.FunctionComponent<Props> = ({ location, history }) => {
+  const onClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      history.goBack();
+    },
+    [location],
+  );
+  const path = location.pathname === '/cart' ? '장바구니' : '주문하기';
   return (
     <header className={cx('header')}>
-      <Link to="/">이전 페이지</Link>
-      <h1>주문하기</h1>
-      <Link to="/" className={cx('cart')}>
-        장바구니
-      </Link>
+      <a onClick={onClick}>이전 페이지</a>
+      <h1>{path}</h1>
+      {location.pathname === '/cart' || (
+        <Link to="/cart" className={cx('cart')}>
+          장바구니
+        </Link>
+      )}
     </header>
   );
 };
 
-export default Header;
+export default withRouter(Header);

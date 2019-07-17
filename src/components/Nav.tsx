@@ -1,28 +1,33 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, match } from 'react-router-dom';
 import cn from 'classnames/bind';
 import styles from './Nav.scss';
+import { Location } from 'history';
 
 const cx = cn.bind(styles);
+
+function isExact(product: String | null) {
+  return function isActive(_: match<{}>, location: Location) {
+    const query = new URLSearchParams(location.search);
+    return query.get('product') === product;
+  };
+}
+
+const product = ['전체', '에스프레소', '블렌디드', '티', '기타'];
 
 const Nav = () => {
   return (
     <div className={cx('nav')}>
-      <NavLink to="/" exact={true} activeClassName={cx('active')}>
-        전체
-      </NavLink>
-      <NavLink to="/a" exact={true} activeClassName={cx('active')}>
-        에스프레소
-      </NavLink>
-      <NavLink to="/b" exact={true} activeClassName={cx('active')}>
-        블렌디드
-      </NavLink>
-      <NavLink to="/c" exact={true} activeClassName={cx('active')}>
-        티
-      </NavLink>
-      <NavLink to="/d" exact={true} activeClassName={cx('active')}>
-        기타
-      </NavLink>
+      {product.map(p => (
+        <NavLink
+          key={p}
+          to={`/?product=${p}`}
+          isActive={isExact(p)}
+          activeClassName={cx('active')}
+        >
+          {p}
+        </NavLink>
+      ))}
     </div>
   );
 };

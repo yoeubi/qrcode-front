@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import cn from 'classnames/bind';
 import styles from './App.scss';
 import Header from './components/Header';
-import Nav from './components/Nav';
-import List from './components/List';
+import { Route } from 'react-router';
+import MainPage from './pages/MainPage';
 const cx = cn.bind(styles);
 
 class App extends Component<{}> {
@@ -11,8 +11,7 @@ class App extends Component<{}> {
     return (
       <div className={cx('app')}>
         <Header />
-        <Nav />
-        <List />
+        <Route exact={true} path="/" component={MainPage} />
       </div>
     );
   }

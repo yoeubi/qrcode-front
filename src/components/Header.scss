@@ -8,6 +8,7 @@
     height: 50px;
     color: transparent;
     position: relative;
+    cursor: pointer;
     &::before {
       display: inline-block;
       overflow: hidden;
