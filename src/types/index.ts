@@ -8,3 +8,8 @@ export interface Category {
   type: string;
   products: Product[];
 }
+
+export interface Cart {
+  product: Product;
+  quantity: number;
+}

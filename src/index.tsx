@@ -8,7 +8,11 @@ import { createStore } from 'redux';
 import modules from './modules';
 import { Provider } from 'react-redux';
 
-const store = createStore(modules);
+const store = createStore(
+  modules,
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -3,10 +3,9 @@ import Item from './Item';
 import cn from 'classnames/bind';
 import styles from './List.scss';
 import { Product } from './../types/index';
-import Modal from './Modal';
-import SelectBackground from './SelectBackground';
-import Select from './Select';
 import SelectContainer from './../containers/SelectContainer';
+import Modal from './Modal';
+import Add from './Add';
 
 const cx = cn.bind(styles);
 
@@ -15,24 +14,35 @@ interface Props {
 }
 
 interface State {
-  isActive: boolean;
   selectedProduct: Product | null;
+  isActive: boolean;
 }
 
 class List extends Component<Props, State> {
+  id: number = 0;
   state = {
-    isActive: false,
     selectedProduct: null,
+    isActive: false,
   };
   onModal(product: Product) {
-    this.setState(prev => ({
-      isActive: !prev.isActive,
+    this.setState(() => ({
       selectedProduct: product,
     }));
+    document.body.style.overflow = 'hidden';
   }
+  onClose = () => {
+    this.setState(() => ({ isActive: true, selectedProduct: null }));
+    document.body.style.overflow = 'auto';
+    if (this.id) {
+      clearTimeout(this.id);
+    }
+    this.id = setTimeout(() => {
+      this.setState(() => ({ isActive: false }));
+    }, 2000);
+  };
   render() {
     const { products } = this.props;
-    const { isActive, selectedProduct } = this.state;
+    const { selectedProduct, isActive } = this.state;
     return (
       <>
         <ul className={cx('list')}>
@@ -40,12 +50,12 @@ class List extends Component<Props, State> {
             <Item key={p.name} product={p} onClick={() => this.onModal(p)} />
           ))}
         </ul>
+        {selectedProduct && (
+          <SelectContainer product={selectedProduct!} onClose={this.onClose} />
+        )}
         {isActive && (
           <Modal>
-            <>
-              <SelectBackground />
-              {selectedProduct && <SelectContainer product={selectedProduct} />}
-            </>
+            <Add />
           </Modal>
         )}
       </>

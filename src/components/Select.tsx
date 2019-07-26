@@ -10,16 +10,27 @@ interface Props {
   quantity: number;
   onIncrease: () => void;
   onDecrease: () => void;
+  onClose: () => void;
+  addCart: () => void;
 }
 
-const Select = ({ product, onDecrease, onIncrease, quantity }: Props) => {
+const Select = ({
+  product,
+  onDecrease,
+  onIncrease,
+  quantity,
+  onClose,
+  addCart,
+}: Props) => {
   return (
     <div className={cx('select-wrap')}>
       <div className={cx('select')}>
         <div className={cx('info')}>
           <div className={cx('content')}>
             <span className={cx('name')}>{product.name}</span>
-            <span className={cx('close')}>메뉴 삭제</span>
+            <span className={cx('close')} onClick={onClose}>
+              메뉴 삭제
+            </span>
           </div>
         </div>
         <div className={cx('panel')}>
@@ -35,7 +46,9 @@ const Select = ({ product, onDecrease, onIncrease, quantity }: Props) => {
           <span className={cx('price')}>{quantity * product.price}원</span>
         </div>
         <div className={cx('confirm-wrap')}>
-          <button className={cx('confirm')}>장바구니</button>
+          <button className={cx('confirm')} onClick={addCart}>
+            장바구니
+          </button>
         </div>
       </div>
     </div>

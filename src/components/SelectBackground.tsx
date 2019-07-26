@@ -4,8 +4,12 @@ import styles from './SelectBackground.scss';
 
 const cx = cn.bind(styles);
 
-const SelectBackground = () => {
-  return <div className={cx('select-background')}></div>;
+interface Props {
+  onClose: () => void;
+}
+
+const SelectBackground = ({ onClose }: Props) => {
+  return <div className={cx('select-background', 'show')} onClick={onClose} />;
 };
 
 export default SelectBackground;

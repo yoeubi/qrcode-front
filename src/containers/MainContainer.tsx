@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../components/Nav';
 import List from './../components/List';
-import { State } from './../modules/index';
+import { StoreState } from './../modules/index';
 import { connect } from 'react-redux';
 import { Category } from '../types';
 import { RouteComponentProps } from 'react-router-dom';
@@ -40,7 +40,7 @@ class MainContainer extends Component<Props> {
   }
 }
 
-function mapStateToProps(state: State) {
+function mapStateToProps(state: StoreState) {
   return {
     categories: state.list.categories,
   };
