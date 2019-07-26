@@ -105,7 +105,8 @@ section,
 main {
   display: block;
 }
-ul {
+ul,
+ol {
   list-style: none;
 }
 table {
@@ -136,4 +137,17 @@ a {
   overflow: hidden;
   margin: -1px;
   clip: rect(0, 0, 0, 0);
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+input {
+  border: none;
 }

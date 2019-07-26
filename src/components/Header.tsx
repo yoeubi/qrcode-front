@@ -23,6 +23,7 @@ const Header: React.FunctionComponent<Props> = ({ location, history }) => {
       {location.pathname === '/cart' || (
         <Link to="/cart" className={cx('cart')}>
           장바구니
+          <span className={cx('count')}>2</span>
         </Link>
       )}
     </header>

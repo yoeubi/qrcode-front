@@ -4,30 +4,46 @@ import cn from 'classnames/bind';
 import styles from './Nav.scss';
 import { Location } from 'history';
 
+interface Props {
+  category: string[] | null;
+}
+
 const cx = cn.bind(styles);
 
-function isExact(product: String | null) {
+function isExact(category: String | null) {
   return function isActive(_: match<{}>, location: Location) {
     const query = new URLSearchParams(location.search);
-    return query.get('product') === product;
+    return query.get('category') === category;
   };
 }
 
-const product = ['전체', '에스프레소', '블렌디드', '티', '기타'];
-
-const Nav = () => {
+const Nav = ({ category }: Props) => {
   return (
     <div className={cx('nav')}>
-      {product.map(p => (
-        <NavLink
-          key={p}
-          to={`/?product=${p}`}
-          isActive={isExact(p)}
-          activeClassName={cx('active')}
-        >
-          {p}
-        </NavLink>
-      ))}
+      <ul>
+        <li>
+          <NavLink
+            to="/"
+            isActive={isExact(null)}
+            activeClassName={cx('active')}
+          >
+            전체
+          </NavLink>
+        </li>
+        {category &&
+          category.map(p => (
+            <li key={p}>
+              <NavLink
+                key={p}
+                to={`/?category=${p}`}
+                isActive={isExact(p)}
+                activeClassName={cx('active')}
+              >
+                {p}
+              </NavLink>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };

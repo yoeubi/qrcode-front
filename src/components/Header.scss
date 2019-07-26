@@ -2,6 +2,11 @@
   background-color: #03c75a;
   border-bottom: 1px solid #00af35;
   height: 50px;
+  position: fixed;
+  width: 100%;
+  max-width: 414px;
+  z-index: 100;
+  top: 0;
   a {
     float: left;
     width: 50px;
@@ -37,7 +42,7 @@
   }
   .cart {
     float: right;
-    width: 40px;
+    width: 50px;
     color: transparent;
     position: relative;
     &::before {
@@ -50,6 +55,20 @@
       background-size: 320px 148px;
       background-position: -279px -64px;
       background-image: url('../assets/sp_w_layout.png');
+    }
+    .count {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      min-width: 16px;
+      height: 15px;
+      background-color: #fc4c4e;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 15px;
+      text-align: center;
     }
   }
 }
