@@ -22,6 +22,7 @@
 
 ## 디렉토리
 
+```
 public
 src
 |- assets
@@ -29,3 +30,4 @@ src
 |- containers
 |- modules
 |- types
+```
