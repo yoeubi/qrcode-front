@@ -9,7 +9,7 @@ const cx = cn.bind(styles);
 
 interface Props {
   onPay: () => void;
-  onMod: (payload: Cart) => void;
+  onMod: (payload: Cart, sing: 'plus' | 'minus') => void;
   onRemove: (payload: string) => void;
   carts: Cart[];
 }

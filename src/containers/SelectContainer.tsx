@@ -2,25 +2,20 @@ import React, { Component } from 'react';
 import Select from '../components/Select';
 import { Product } from '../types';
 import SelectBackground from '../components/SelectBackground';
-import { connect } from 'react-redux';
-import { addCart } from '../modules/cart';
-import { Dispatch } from 'redux';
 import { Cart } from './../types/index';
 
 interface Props {
   product: Product;
   onClose: () => void;
-  addCart: (payload: Cart) => void;
+  onSubmit: (cart: Cart) => void;
 }
 
 interface State {
   quantity: number;
-  isSubmit: boolean;
 }
 class SelectContainer extends Component<Props, State> {
   state = {
     quantity: 1,
-    isSubmit: false,
   };
   onIncrease = () => {
     this.setState(prev => ({ quantity: prev.quantity + 1 }));
@@ -33,10 +28,11 @@ class SelectContainer extends Component<Props, State> {
     }
     this.setState(prev => ({ quantity: prev.quantity - 1 }));
   };
-  submit: (cart: Cart) => () => void = cart => () => {
-    const { onClose, addCart } = this.props;
+  onConfirm = () => {
+    const { product, onClose, onSubmit } = this.props;
+    const { quantity } = this.state;
+    onSubmit({ product, quantity });
     onClose();
-    addCart(cart);
   };
   render() {
     const { product, onClose } = this.props;
@@ -50,20 +46,10 @@ class SelectContainer extends Component<Props, State> {
           onDecrease={this.onDecrease}
           quantity={quantity}
           onClose={onClose}
-          addCart={this.submit({ product, quantity })}
+          addCart={this.onConfirm}
         />
       </>
     );
   }
 }
-
-function mapDispatchToProps(dispatch: Dispatch) {
-  return {
-    addCart: (payload: Cart) => dispatch(addCart(payload)),
-  };
-}
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(SelectContainer);
+export default SelectContainer;

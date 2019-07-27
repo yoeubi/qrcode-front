@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import cn from 'classnames/bind';
 import styles from './Item.scss';
-import { Iitem } from '../types';
 import { Product } from './../types/index';
 
 const cx = cn.bind(styles);
@@ -15,7 +13,7 @@ interface Props {
 const Item = ({ product, onClick }: Props) => {
   return (
     <li className={cx('item')} onClick={onClick}>
-      <Link to="/">
+      <span>
         <div className={cx('img-wrap')}>
           <img src={product.src} alt={product.name} />
         </div>
@@ -27,7 +25,7 @@ const Item = ({ product, onClick }: Props) => {
             <span className={cx('price')}>{product.price}원</span>
           </div>
         </div>
-      </Link>
+      </span>
     </li>
   );
 };

@@ -1,0 +1,32 @@
+.cart {
+  float: right;
+  width: 50px;
+  height: 50px;
+  color: transparent;
+  position: relative;
+  &::before {
+    width: 40px;
+    height: 40px;
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background-size: 320px 148px;
+    background-position: -279px -64px;
+    background-image: url('../assets/sp_w_layout.png');
+  }
+  .count {
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    min-width: 16px;
+    height: 15px;
+    background-color: #fc4c4e;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 15px;
+    text-align: center;
+  }
+}

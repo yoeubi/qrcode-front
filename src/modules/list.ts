@@ -47,9 +47,38 @@ const initailState: ListState = {
         },
         {
           src:
+            'http://image.istarbucks.co.kr/upload/store/skuimg/2018/07/[9200000001636]_20180726125512959.jpg',
+          name: '콜드 브루 몰트',
+          price: 8500,
+        },
+        {
+          src:
+            'http://image.istarbucks.co.kr/upload/store/skuimg/2018/07/[9200000001635]_20180726125607716.jpg',
+          name: '콜드 브루 플로트',
+          price: 8800,
+        },
+        {
+          src:
             'http://image.istarbucks.co.kr/upload/store/skuimg/2018/04/[9200000000949]_20180410163003570.jpg',
           name: '콜드 폼 콜드 브루',
           price: 5800,
+        },
+      ],
+    },
+    {
+      type: '브루드 커피',
+      products: [
+        {
+          src:
+            'http://image.istarbucks.co.kr/upload/store/skuimg/2015/07/[106509]_20150724164325806.jpg',
+          name: '아이스 커피',
+          price: 4100,
+        },
+        {
+          src:
+            'http://image.istarbucks.co.kr/upload/store/skuimg/2015/07/[2]_20150724164438965.jpg',
+          name: '오늘의 커피',
+          price: 3800,
         },
       ],
     },

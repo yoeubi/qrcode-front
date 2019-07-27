@@ -1,47 +1,26 @@
-import React, { useCallback } from 'react';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import cn from 'classnames/bind';
 import styles from './Header.scss';
-import { StoreState } from './../modules/index';
-import { connect } from 'react-redux';
-
-interface Props extends RouteComponentProps {
-  count: number;
-}
+import BasketContainer from '../containers/BasketContainer';
 
 const cx = cn.bind(styles);
+interface Props extends RouteComponentProps {}
 
-const Header: React.FunctionComponent<Props> = ({
-  location,
-  history,
-  count,
-}) => {
-  const onClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
-      e.preventDefault();
-      history.goBack();
-    },
-    [location],
-  );
-  const path = location.pathname === '/cart' ? '장바구니' : '주문하기';
+const Header = ({ history, location }: Props) => {
+  const onBack = () => {
+    history.goBack();
+  };
+  const title = location.pathname === '/cart' ? '장바구니' : '주문하기';
   return (
     <header className={cx('header')}>
-      <a onClick={onClick}>이전 페이지</a>
-      <h1>{path}</h1>
-      {location.pathname === '/cart' || (
-        <Link to="/cart" className={cx('cart')}>
-          장바구니
-          {count > 0 && <span className={cx('count')}>{count}</span>}
-        </Link>
-      )}
+      <a onClick={onBack} className={cx('before')}>
+        이전 페이지
+      </a>
+      <h1>{title}</h1>
+      {location.pathname === '/cart' || <BasketContainer />}
     </header>
   );
 };
 
-function mapStateToProps(state: StoreState) {
-  return {
-    count: state.cart.carts.length,
-  };
-}
-
-export default withRouter(connect(mapStateToProps)(Header));
+export default withRouter(Header);
