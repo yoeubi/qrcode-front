@@ -17,8 +17,11 @@ interface Props extends RouteComponentProps {
 
 class CartListContainer extends Component<Props> {
   onPay = () => {
-    alert('결과 완료');
-    const { clearCart, history } = this.props;
+    const { clearCart, history, carts } = this.props;
+    if (carts.length <= 0) {
+      return;
+    }
+    alert('네이버 페이 완료');
     clearCart();
     history.replace('/');
   };
